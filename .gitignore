@@ -1,0 +1,15 @@
+# Virtual Environments
+venv/
+.venv/
+env/
+
+# Large media outputs & test files
+*.mp4
+*.jpg
+*.jpeg
+*.png
+
+# Python & macOS cache
+__pycache__/
+*.pyc
+.DS_Store
