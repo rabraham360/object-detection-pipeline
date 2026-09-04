@@ -21,7 +21,28 @@ model, device = load_model()
 confidence_threshold = st.sidebar.slider("Confidence Threshold", 0.1, 1.0, 0.5)
 
 RTC_CONFIGURATION = RTCConfiguration(
-    {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
+    {
+        "iceServers": [
+            # Standard Google STUN Servers
+            {
+                "urls": [
+                    "stun:stun.l.google.com:19302",
+                    "stun:stun1.l.google.com:19302",
+                    "stun:stun2.l.google.com:19302",
+                    "stun:stun3.l.google.com:19302",
+                ]
+            },
+            # Free TURN Relays (Bypasses Restrictive NATs & Streamlit Cloud Firewalls)
+            {
+                "urls": [
+                    "turn:openrelay.metered.ca:80",
+                    "turn:openrelay.metered.ca:443",
+                    "turn:openrelay.metered.ca:443?transport=tcp",
+                ],
+                "username": "openrelayproject",
+                "credential": "openrelayproject",
+            },
+        ]}
 )
 
 class ObjectDetector(VideoProcessorBase):
